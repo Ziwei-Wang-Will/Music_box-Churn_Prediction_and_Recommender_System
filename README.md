@@ -4,11 +4,11 @@ X music box is a well-known music player platform and interested in Churn Predic
 
 # Dataset description
 
-#### Play Data: 
+#### Play log Data: 
 'uid', 'device', 'song_id', 'song_type', 'song_name', 'singer', 'play_time', 'song_length', 'paid_flag', 'date'
 
-#### Download Data: 
+#### Download log Data: 
 'uid', 'device', 'song_id', 'song_name', 'singer', 'paid_flag', 'date'
 
-#### Search Data: 
+#### Search log Data: 
 'uid', 'device', 'time_stamp', 'search_query', 'date'
