@@ -16,17 +16,18 @@ X music box is a well-known music player platform and interested in Churn Predic
 
 # Project objects
 
-## Objects One: Churn Prediction
-● Validate dataset, identify missing values and find inconsistencies in the dataset.
-● Perform data cleaning and transformation, feature engineering
-● Exploratory data analysis, e.g. find most popular songs, most active users
+## Objects One: Churn Prediction  
+● Validate dataset, identify missing values and find inconsistencies in the dataset.  
+● Perform data cleaning and transformation, feature engineering  
+● Exploratory data analysis, e.g. find most popular songs, most active users  
 ● Build user churn prediction model based on user behavior, implement full cycle of prediction modeling from population selection and sampling, label definition, feature exaction and engineering, model selection, performance evaluation.
 
 
-## Objects Two: Recommendation
-● Validate dataset, identify missing values and find inconsistencies in the dataset.
-● Perform data cleaning and transformation, and construct utility matrix from user behavior data
-● Define implicit ratings from user behavior data
-● Build music recommendation system based on user listening history, including: popularity-based recommender, item-item based recommender, matrix factorization-based recommender.
+## Objects Two: Recommendation  
+● Validate dataset, identify missing values and find inconsistencies in the dataset.  
+● Perform data cleaning and transformation, and construct utility matrix from user behavior data  
+● Define implicit ratings from user behavior data  
+● Build music recommendation system based on user listening history, including: popularity-based recommender, item-item based recommender, matrix factorization-based recommender.  
+
 
 
