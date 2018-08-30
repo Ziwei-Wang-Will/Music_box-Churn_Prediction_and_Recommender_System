@@ -13,7 +13,8 @@ X music box is a well-known music player platform and interested in Churn Predic
 #### Search log data: 
 'uid', 'device', 'time_stamp', 'search_query', 'date'
 
-Raw data samples please refer to: https://github.com/will-zw-wang/Music_box/tree/master/raw_log_data_samples
+#### Raw data samples please refer to:  
+https://github.com/will-zw-wang/Music_box/tree/master/raw_log_data_samples
 
 
 ## Project objects
