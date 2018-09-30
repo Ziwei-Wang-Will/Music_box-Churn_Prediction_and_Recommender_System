@@ -13,7 +13,7 @@ X music box is a well-known music player platform and interested in **Churn Pred
   - 'uid', 'device', 'song_id', 'song_name', 'singer', 'paid_flag', 'date'
 - Search log data
   - 'uid', 'device', 'time_stamp', 'search_query', 'date'
-- [**Raw data samples**](https://github.com/will-zw-wang/Music_box/tree/master/raw_log_data_samples)
+[**Raw data samples**](https://github.com/will-zw-wang/Music_box/tree/master/raw_log_data_samples)
 
 
 
