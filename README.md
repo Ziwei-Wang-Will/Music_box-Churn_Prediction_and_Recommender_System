@@ -1,6 +1,6 @@
 # Music_Box
 
-<img src="https://github.com/will-zw-wang/Music_box/blob/master/images/music_box_image.jpg" width="960" height="240">
+<img src="https://github.com/will-zw-wang/Music_box-Churn_Prediction_and_Recommender_System/blob/master/images/music_box_image.jpg" width="960" height="240">
 
 ## Project Objectives
 
@@ -13,12 +13,14 @@ X music box is a well-known music player platform and interested in **Churn Pred
   - 'uid', 'device', 'song_id', 'song_name', 'singer', 'paid_flag', 'date'
 - Search log data
   - 'uid', 'device', 'time_stamp', 'search_query', 'date'
-- [**Raw data samples**](https://github.com/will-zw-wang/Music_box/tree/master/raw_log_data_samples)
+- [**Raw data samples**](https://github.com/will-zw-wang/Music_box-Churn_Prediction_and_Recommender_System/tree/master/raw_log_data_samples)
 
 
 ## Analysis Structure
 1. Data Exploration and Down Sampling by User
 2. Data Processing and Feature Engineering with Spark
+3. Churn Prediction Model Fitting, Models Comparison and HyperParameter Tuning
+4. Churn Prediction Analysis, Insights and Recommendations
 
 
 
@@ -36,7 +38,7 @@ X music box is a well-known music player platform and interested in **Churn Pred
     - 0.8 million 'S' log records, ‘S’ for ‘search’.
     - 0.6 million 'P' log records, ‘P’ for ‘play’.
 - Create event table for feature generation  
-- [**Detailed Code**](https://github.com/will-zw-wang/Music_box/blob/master/code/3_down_sampling_by_user.ipynb)
+- [**Detailed Code**](https://github.com/will-zw-wang/Music_box-Churn_Prediction_and_Recommender_System/blob/master/code/3_down_sampling_by_user.ipynb)
 
 ### 2. Data Processing and Feature Engineering with Spark
 - Label definition
@@ -52,6 +54,101 @@ X music box is a well-known music player platform and interested in **Churn Pred
   - Data cleaning for "play_time"
 - Feature generation
   - Generate Features A: Play time percentage related features
-    - Generate Features **Proportion features of different level of play time percentage**
+    - Generate features **play time percentage proportion feature**:
+      - **time_percentage_0_to_20**, **time_percentage_20_to_40**, **time_percentage_40_to_60**, **time_percentage_60_to_80**, and **time_percentage_larger_than_80**.
+      - **Note**: for each ‘uid’, the sum of five features above is 1.
+      - **For example**: ‘time_percentage_0_to_20’ means 0<=percentage<20, which is ratio of (number of played songs with play time percentage less than 20%) to (total number of played songs) per ‘uid’
+    - Generate features **Acceleration features of different level of play time percentage**: Ratio of count of songs played with >=80 percentage of nearest 7 days to that of nearest 30 days.
+  - Generate Features B: Play time percentage related features
+    - Generate features **Total play_time**: Total play time per ‘uid’.
+    - Generate features **Acceleration features of total play_time**: Ratio of total play time of nearest 7 days to that of nearest 30 days. 
+      - If the total play time acceleration ratio is less than 25%, means user had played less time in the last 7 days than average level of the last 30 days.
+    - Generate features **Average play_time of played songs**: Average play time of songs per ‘uid’.
+  - Generate Features C: Event related features
+    - Generate features **events frequency in given windows**: Count of ‘P’, ‘D’ and ‘S’ in given windows per ‘uid’.
+    - Generate features **Acceleration features of events**: Ratio of event frequency of nearest 7 days to that of nearest 30 days. 
+      - If the total play time acceleration ratio is less than 25%, means user had had operated less frequently in the last 7 days than average level of the last 30 days.
+  - Generate Features D: Recency related features
+    - Generate features **Last Event Time from feature_window_end_date**: Measure the time gap between ‘the last active day’ and ‘feature_window_end_date’.
+  - Generate Features E: Profile related features
+    - Generate features **device_feature**: Device type per ‘uid’.
+      - We found 20 users use multiple devices, we assigned the device label as device with more entries by correspond user, if user has the same entries number of 'android' and 'iphone', we assign its device label as 'iphone'.
+- Form training data for prediction models
+- Form rating data for recommendation system
+  - We define ‘rating’ as max{‘play_score’, ‘download_score’}: 
+    - ‘play_score’ are generate by ‘play_time_percentage_of_song_length’ with idea that the larger played percentage is, the more likely the user like the song, rules as below: 
+      - 0.8 <= ‘play_time_percentage_of_song_length’, assign ‘play_score’ 5
+      - 0.6 <= ‘play_time_percentage_of_song_length’ < 0.8, assign ‘play_score’ 4
+      - 0.4 <= ‘play_time_percentage_of_song_length’ < 0.6, assign ‘play_score’ 3
+      - 0.2 <= ‘play_time_percentage_of_song_length’ < 0.4, assign ‘play_score’ 2
+      - 0 <= ‘play_time_percentage_of_song_length’ < 0.2, assign ‘play_score’ 1
+      - **Note**: If per uid per song_id has multiple ratings, we take average.
+    - ‘download_score’ are generate by whether user has download entry in feature window: 2017-03-30 ~ 2017-04-28 with idea that if a user downloads a song, he has great probability to like the song, rules as below: 
+    - If have download entry, assign ‘download_score’ 5
+    - If no download entry, assign ‘download_score’ 0
+- [**Detailed Code**](https://github.com/will-zw-wang/Music_box-Churn_Prediction_and_Recommender_System/blob/master/code/4_feature_label_generation_with_spark.ipynb)
 
+### 3. Churn Prediction Model Fitting, Models Comparison and HyperParameter Tuning
+- Models comparison and reasoning
+  - **Logistic Regression**
+    - **AUC** of test data is **0.8866** with **Logistic Regression**.
+    - We tried to improve model performance with **Random Forest**.
+  - **Random Forest**
+    - **AUC** of test data is **0.9061** with **Random Forest**, better than that of **Logistic Regression** with **0.8866**.
+      - **Reason**: There are feature interaction and non-linearity relationship between features and target in our data set, trees algorithms can deal with these problems while logistic regression cannot.
+    - We tried to further improve model performance with **Gradient Boosting Trees**.
+      - **Reason**: In general, **Gradient Boosting Trees** can perform better than **Random Forest**, because it additionally tries to find optimal linear combination of trees (assume final model is the weighted sum of predictions of individual trees) in relation to given train data. This extra tuning may lead to more predictive power.
+  - **Gradient Boosting Trees**
+    - **AUC** of test data is **0.9036** with **Gradient Boosting Trees**, is close to that of **Random Forest** with **0.9061**.
+      - **Reason**: Our **Random forest** has already performed greatly in this dataset and hard for **Gradient Boosting Trees** to perform better.
+    - Thus, we chose **Random Forest** as our preferred model.
+    - Then we tried HyperParameter Tuning with Grid Search for Random Forest, to figure out whether we can do better.
+- **Random Forest HyperParameter Tuning with Grid Search**
+  - **AUC** of test data is **0.9062** with **Random Forest HyperParameter Tuning with Grid Search**, is slightly better than that of previous **Random Forest** with **0.9061**
+  - we select this model to explore the features importance to get some insights.
+- [**Detailed Code**](https://github.com/will-zw-wang/Music_box-Churn_Prediction_and_Recommender_System/blob/master/code/5_train_model_sklearn.ipynb) 
 
+### 4. Churn Prediction Analysis, Insights and Recommendations
+
+<img src="https://github.com/will-zw-wang/Music_box-Churn_Prediction_and_Recommender_System/blob/master/images/Ranked_Feature_Importance_Generated_by_Random_Forest.png"> 
+
+- Top 10 features analysis
+  - **demo_page_total_stayTime**: the longer time a user spent in ‘demo’ page is, the more likely the user will sign up. And its feature importance is larger than those of 'index_page_total_stayTime', 'about_page_total_stayTime' and courses_page_total_stayTime', which shows user is more likely to visit our 'demo' page than the others.
+  - **last_P_time_from_2017-04-28**: the larger the time gap between 'the last active day' and 'feature_window_end_date' is, the more likely the user will churn.   
+  - **freq_P_last_7**: the smaller play frequency in the last 7 days, the more likely the user will churn. And its feature importance is larger than those of 'freq_P_last_14', 'freq_P_last_30', which shows user recent behavior pattern is more informative.  
+  - **freq_P_last_14**: the same idea with 'freq_P_last_7'  
+  - **total_play_time_7d_over_30d**: if the total play time acceleration ratio is less than 25%, means user had played less time in the last 7 days than average level of the last 30 days, the smaller the ratio is, the more likely the user will churn. 
+  - **time_percentage_larger_than_80_7d_over_30d**: if the time_percentage acceleration ratio is less than 25%, means user had played less songs with high percentage in the last 7 days than average level of the last 30 days, the smaller the ratio is, the more likely the user will churn.   
+  - **P_7d_over_30d**: if the play frequency acceleration ratio is less than 25%, means user had played less frequently in the last 7 days than average level of the last 30 days, the smaller the ratio is, the more likely the user will churn.   
+  - **total_play_time**: the smaller total play time is, the more likely the user will churn.   
+  - **freq_P_last_30**: the same idea with 'freq_P_last_7'.  
+  - **freq_S_last_14**: the smaller search frequency in the last 14 days, the more likely the user will churn. Its feature importance is large perhaps because 14 days fits our label window which last 14 days better.  
+  - **freq_P_last_3**: the same idea with 'freq_P_last_7', while its time window is too short to be as informative as 'freq_P_last_7'  
+ 
+- Business model and stage analysis
+  - As we are not told what business the music box is running, we will analyze different scenarios to figure out what we can do to reactive users with high churn probability:
+    - 1．If it's running a freemium model: 
+      - For free users with high churn probability, we can offer them one month paid version free trial to reactive them; 
+      - For paid users with high churn probability, we can offer them discount or even a freemonth; 
+    - 2． If it's running a paid model: 
+      - For paid users with high churn probability, we can offer them discount or even a freemonth;
+  - Of course, we need to consider two factors before offering free trial, discount or freemonth:
+    - 1.  We should weigh the cost of doing so against the cost of acquiring another customer. 
+    - 2.  We should make sure whether our music box is in the 'Stickiness' stage to improve user engagement, or in the 'Revenue' stage to improve profits.
+  - **Scenarios one**:
+    - If music box is in the 'Stickiness' stage, it's reasonable to offer trial, discount and freemonth even when the cost of doing so overweighs the cost of acquiring another customer to improve user engagement.
+  - **Scenarios two**:
+    - If music box is in 'Revenue' stage and the cost of offering trial, discount or freemonth overweighs the cost of acquiring another customer, it's better to just sending e-mail and allocate more budgets to campaigns to attract new users and improve profits.
+  - We calculated the churn rate of our music box with 0.62. As the churn rate is very high, we concluded it's in the 'Stickiness' stage, thus offering free trial, discount or freemonth is reasonable, and sending e-mail which is applicable to every business model is also good choice.
+  
+- Insights and Recommendations
+  - Users' recent behavior pattern is more informative, we should pay more attention to last 7 days and last 14 days related matric, especially frequency features and acceleration features, like 'freq_P_last_14', 'freq_P_last_7', 'P_7d_over_30d', 'total_play_time_7d_over_30d' and 'time_percentage_larger_than_80_7d_over_30d'.
+  - Once the time gap between 'the last active day' and feature_window_end_date' comes to 7 days, we should pay more attention to these users; once the time gap comes to 14 days, we should take some action to reactive them, like sending e-mail to recommend songs, offering free trial, discount or freemonth.
+  - Generate the churn probability of every user and rank to figure out the users most likely to churn, then send them e-mail to recommend songs, or offer them free trial, discount or freemonth to reactive them.
+  - Figure out our target users who are most unlikely to churn with our model, try to figure out what’s common to this subsection of users, refocus on their needs, and grow from there. 
+    - To be specific, develop features which target users care, allocate campaigns budget to markets where our target users in.
+
+- Next step
+  - If we have a hypothesis that users churn because they don't like the songs we provide, we can analyze the songs played by churn users before they churned in a suitable time windows, try to figure out what’s common to the songs driven users churn, and avoid providing these kinds.
+  - It’s also important to track performance over time. If we have more data, we can see whether we’re improving or not, perform cohort analysis by comparing churn rate for each month.
+  - Develop 'like' feature to build a lock-in users experience, user can 'like' the music and keep it in their personal playlist, the more songs users keep, the stickier they will be, because there’s a lot of data in place, so churn probability may be lower.
