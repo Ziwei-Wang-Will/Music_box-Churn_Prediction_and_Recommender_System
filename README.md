@@ -20,7 +20,7 @@ X music box is a well-known music player platform and interested in **Churn Pred
 1. Data Exploration and Down Sampling by User
 2. Data Processing and Feature Engineering with Spark
 3. Churn Prediction Model Fitting, Models Comparison and HyperParameter Tuning
-4. Churn Prediction Analysis, Insights, Recommendations and Next Step
+4. Churn Prediction Analysis, Insights and Next Step
 
 
 
@@ -108,12 +108,11 @@ X music box is a well-known music player platform and interested in **Churn Pred
   - we select this model to explore the features importance to get some insights.
 - [**Detailed Code**](https://github.com/will-zw-wang/Music_box-Churn_Prediction_and_Recommender_System/blob/master/code/5_train_model_sklearn.ipynb) 
 
-### 4. Churn Prediction Analysis, Insights, Recommendations and Next Step
+### 4. Churn Prediction Analysis, Insights and Next Step
 
 <img src="https://github.com/will-zw-wang/Music_box-Churn_Prediction_and_Recommender_System/blob/master/images/Ranked_Feature_Importance_Generated_by_Random_Forest.png"> 
 
 - Top 10 features analysis
-  - **demo_page_total_stayTime**: the longer time a user spent in ‘demo’ page is, the more likely the user will sign up. And its feature importance is larger than those of 'index_page_total_stayTime', 'about_page_total_stayTime' and courses_page_total_stayTime', which shows user is more likely to visit our 'demo' page than the others.
   - **last_P_time_from_2017-04-28**: the larger the time gap between 'the last active day' and 'feature_window_end_date' is, the more likely the user will churn.   
   - **freq_P_last_7**: the smaller play frequency in the last 7 days, the more likely the user will churn. And its feature importance is larger than those of 'freq_P_last_14', 'freq_P_last_30', which shows user recent behavior pattern is more informative.  
   - **freq_P_last_14**: the same idea with 'freq_P_last_7'  
@@ -152,3 +151,5 @@ X music box is a well-known music player platform and interested in **Churn Pred
   - If we have a hypothesis that users churn because they don't like the songs we provide, we can analyze the songs played by churn users before they churned in a suitable time windows, try to figure out what’s common to the songs driven users churn, and avoid providing these kinds.
   - It’s also important to track performance over time. If we have more data, we can see whether we’re improving or not, perform cohort analysis by comparing churn rate for each month.
   - Develop 'like' feature to build a lock-in users experience, user can 'like' the music and keep it in their personal playlist, the more songs users keep, the stickier they will be, because there’s a lot of data in place, so churn probability may be lower.
+
+### 5. 
