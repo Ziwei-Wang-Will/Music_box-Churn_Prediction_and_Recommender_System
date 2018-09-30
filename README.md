@@ -1,6 +1,6 @@
 # Music_Box
 
-<img src="https://github.com/will-zw-wang/Music_box/blob/master/images/music_box_image.jpg" height="240">
+<img src="https://github.com/will-zw-wang/Music_box/blob/master/images/music_box_image.jpg" width="480" height="240">
 
 
 
