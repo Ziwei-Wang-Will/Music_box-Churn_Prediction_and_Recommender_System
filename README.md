@@ -129,23 +129,23 @@ X music box is a well-known music player platform and interested in **Churn Pred
  
 - Business model and stage analysis
   - As we are not told what business the music box is running, we will analyze different scenarios to figure out what we can do to reactive users with high churn probability:
-    - 1．If it's running a freemium model: 
+    - 1．If it's running a **freemium model**: 
       - For free users with high churn probability, we can offer them one month paid version free trial to reactive them; 
       - For paid users with high churn probability, we can offer them discount or even a freemonth; 
-    - 2． If it's running a paid model: 
+    - 2． If it's running a **paid model**: 
       - For paid users with high churn probability, we can offer them discount or even a freemonth;
   - Of course, we need to consider two factors before offering free trial, discount or freemonth:
     - 1.  We should weigh the cost of doing so against the cost of acquiring another customer. 
-    - 2.  We should make sure whether our music box is in the 'Stickiness' stage to improve user engagement, or in the 'Revenue' stage to improve profits.
+    - 2.  We should make sure whether our music box is in the **Stickiness stage** to improve user engagement, or in the **Revenue stage** to improve profits.
   - **Scenarios one**:
-    - If music box is in the 'Stickiness' stage, it's reasonable to offer trial, discount and freemonth even when the cost of doing so overweighs the cost of acquiring another customer to improve user engagement.
+    - If music box is in the **Stickiness stage**, it's reasonable to offer trial, discount and freemonth even when the cost of doing so overweighs the cost of acquiring another customer to improve user engagement.
   - **Scenarios two**:
-    - If music box is in 'Revenue' stage and the cost of offering trial, discount or freemonth overweighs the cost of acquiring another customer, it's better to just sending e-mail and allocate more budgets to campaigns to attract new users and improve profits.
-  - We calculated the churn rate of our music box with 0.62. As the churn rate is very high, we concluded it's in the 'Stickiness' stage, thus offering free trial, discount or freemonth is reasonable, and sending e-mail which is applicable to every business model is also good choice.
+    - If music box is in **Revenue stage** and the cost of offering trial, discount or freemonth overweighs the cost of acquiring another customer, it's better to just sending e-mail and allocate more budgets to campaigns to attract new users and improve profits.
+  - We calculated the **churn rate** of our music box with **0.62**. As the churn rate is very high, we concluded it's in the **Stickiness stage**, thus offering free trial, discount or freemonth is reasonable, and sending e-mail which is applicable to every business model is also good choice.
   
 - Insights and Recommendations
-  - Users' recent behavior pattern is more informative, we should pay more attention to last 7 days and last 14 days related matric, especially frequency features and acceleration features, like 'freq_P_last_14', 'freq_P_last_7', 'P_7d_over_30d', 'total_play_time_7d_over_30d' and 'time_percentage_larger_than_80_7d_over_30d'.
-  - Once the time gap between 'the last active day' and feature_window_end_date' comes to 7 days, we should pay more attention to these users; once the time gap comes to 14 days, we should take some action to reactive them, like sending e-mail to recommend songs, offering free trial, discount or freemonth.
+  - Users' recent behavior pattern is more informative, we should pay more attention to last 7 days and last 14 days related matric, especially frequency features and acceleration features, like **freq_P_last_14**, **freq_P_last_7**, **P_7d_over_30d**, **total_play_time_7d_over_30d** and **time_percentage_larger_than_80_7d_over_30d**.
+  - Once the time gap between **the last active day from feature_window_end_date** comes to 7 days, we should pay more attention to these users; once the time gap comes to 14 days, we should take some action to reactive them, like sending e-mail to recommend songs, offering free trial, discount or freemonth.
   - Generate the churn probability of every user and rank to figure out the users most likely to churn, then send them e-mail to recommend songs, or offer them free trial, discount or freemonth to reactive them.
   - Figure out our target users who are most unlikely to churn with our model, try to figure out what’s common to this subsection of users, refocus on their needs, and grow from there. 
     - To be specific, develop features which target users care, allocate campaigns budget to markets where our target users in.
