@@ -107,7 +107,7 @@ X music box is a well-known music player platform and interested in **Churn Pred
 - **Random Forest HyperParameter Tuning with Grid Search**
   - **AUC** of test data is **0.9062** with **Random Forest HyperParameter Tuning with Grid Search**, is slightly better than that of previous **Random Forest** with **0.9061**
   - we select this model to explore the features importance to get some insights.
-- [**Detailed Code**](https://github.com/will-zw-wang/Music_box-Churn_Prediction_and_Recommender_System/blob/master/code/5_train_model_sklearn.ipynb) 
+- [**Detailed Code**](https://github.com/will-zw-wang/Music_box-Churn_Prediction_and_Recommender_System/blob/master/code/5_Churn_Prediction_Models.ipynb) 
 
 ### 4. Churn Prediction Analysis, Insights and Next Step
 
@@ -187,6 +187,7 @@ X music box is a well-known music player platform and interested in **Churn Pred
     - Then we tried to get final recommendations for a user: user_number = 100, and our TruncatedSVD recommender recommended top 10 songs: 
       - [258, 7341, 7512, 18055, 28364, 658, 13202, 45719, 48377, 48378]
       - With an **average absolute error** of **0.044**, which is very close to **0.023** of **NMF**.
+- [**Detailed Code**](https://github.com/will-zw-wang/Music_box-Churn_Prediction_and_Recommender_System/blob/master/code/6_Recommender_Systems.ipynb) 
 
 ### 6. Recommendation Results Analysis, Insights and Next Step
 - Recommendation results Analysis between different recommendation systems for user: user_number = 100
