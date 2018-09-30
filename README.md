@@ -78,7 +78,7 @@ X music box is a well-known music player platform and interested in **Churn Pred
     - Generate features **device_feature**: Device type per ‘uid’.
       - We found 20 users use multiple devices, we assigned the device label as device with more entries by correspond user, if user has the same entries number of 'android' and 'iphone', we assign its device label as 'iphone'.
 - Form training data for prediction models
-- Form rating data for recommendation system
+- Form rating data for recommender systems
   - We define ‘rating’ as max{‘play_score’, ‘download_score’}: 
     - ‘play_score’ are generate by ‘play_time_percentage_of_song_length’ with idea that the larger played percentage is, the more likely the user like the song, rules as below: 
       - 0.8 <= ‘play_time_percentage_of_song_length’, assign ‘play_score’ 5
