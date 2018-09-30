@@ -40,7 +40,7 @@ X music box is a well-known music player platform and interested in **Churn Pred
   - 12 million log records including:
     - 0.6 million 'D' log records, ‘D’ for ‘download’.
     - 0.8 million 'S' log records, ‘S’ for ‘search’.
-    - 0.6 million 'P' log records, ‘P’ for ‘play’.
+    - 11.0 million 'P' log records, ‘P’ for ‘play’.
 - Create event table for feature generation  
 - [**Detailed Code**](https://github.com/will-zw-wang/Music_box-Churn_Prediction_and_Recommender_System/blob/master/code/3_down_sampling_by_user.ipynb)
 
