@@ -20,7 +20,7 @@ X music box is a well-known music player platform and interested in **Churn Pred
 1. Data Exploration and Down Sampling by User
 2. Data Processing and Feature Engineering with Spark
 3. Churn Prediction Model Fitting, Models Comparison and HyperParameter Tuning
-4. Churn Prediction Analysis, Insights and Recommendations
+4. Churn Prediction Analysis, Insights, Recommendations and Next Step
 
 
 
@@ -108,7 +108,7 @@ X music box is a well-known music player platform and interested in **Churn Pred
   - we select this model to explore the features importance to get some insights.
 - [**Detailed Code**](https://github.com/will-zw-wang/Music_box-Churn_Prediction_and_Recommender_System/blob/master/code/5_train_model_sklearn.ipynb) 
 
-### 4. Churn Prediction Analysis, Insights and Recommendations
+### 4. Churn Prediction Analysis, Insights, Recommendations and Next Step
 
 <img src="https://github.com/will-zw-wang/Music_box-Churn_Prediction_and_Recommender_System/blob/master/images/Ranked_Feature_Importance_Generated_by_Random_Forest.png"> 
 
