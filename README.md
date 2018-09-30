@@ -88,8 +88,8 @@ X music box is a well-known music player platform and interested in **Churn Pred
       - 0 <= ‘play_time_percentage_of_song_length’ < 0.2, assign ‘play_score’ 1
       - **Note**: If per uid per song_id has multiple ratings, we take average.
     - **download_score** are generate by whether user has download entry in feature window: 2017-03-30 ~ 2017-04-28 with idea that if a user downloads a song, he has great probability to like the song, rules as below: 
-    - If have download entry, assign ‘download_score’ 5
-    - If no download entry, assign ‘download_score’ 0
+      - If have download entry, assign ‘download_score’ 5
+      - If no download entry, assign ‘download_score’ 0
 - [**Detailed Code**](https://github.com/will-zw-wang/Music_box-Churn_Prediction_and_Recommender_System/blob/master/code/4_feature_label_generation_with_spark.ipynb)
 
 ### 3. Churn Prediction Model Fitting, Models Comparison and HyperParameter Tuning
