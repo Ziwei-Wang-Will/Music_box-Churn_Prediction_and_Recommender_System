@@ -111,9 +111,8 @@ X music box is a well-known music player platform and interested in **Churn Pred
 
 ### 4. Churn Prediction Analysis, Insights and Next Step
 
-<img src="https://github.com/will-zw-wang/Music_box-Churn_Prediction_and_Recommender_System/blob/master/images/Ranked_Feature_Importance_Generated_by_Random_Forest.png"> 
-
 - Top 10 features analysis
+  - <img src="https://github.com/will-zw-wang/Music_box-Churn_Prediction_and_Recommender_System/blob/master/images/Ranked_Feature_Importance_Generated_by_Random_Forest.png"> 
   - **last_P_time_from_2017-04-28**: the larger the time gap between 'the last active day' and 'feature_window_end_date' is, the more likely the user will churn.   
   - **freq_P_last_7**: the smaller play frequency in the last 7 days, the more likely the user will churn. And its feature importance is larger than those of 'freq_P_last_14', 'freq_P_last_30', which shows user recent behavior pattern is more informative.  
   - **freq_P_last_14**: the same idea with 'freq_P_last_7'  
