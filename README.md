@@ -79,15 +79,15 @@ X music box is a well-known music player platform and interested in **Churn Pred
       - We found 20 users use multiple devices, we assigned the device label as device with more entries by correspond user, if user has the same entries number of 'android' and 'iphone', we assign its device label as 'iphone'.
 - Form training data for prediction models
 - Form rating data for recommender systems
-  - We define ‘rating’ as max{‘play_score’, ‘download_score’}: 
-    - ‘play_score’ are generate by ‘play_time_percentage_of_song_length’ with idea that the larger played percentage is, the more likely the user like the song, rules as below: 
+  - We define **rating** as **max{‘play_score’, ‘download_score’}**: 
+    - **play_score** are generate by ‘play_time_percentage_of_song_length’ with idea that the larger played percentage is, the more likely the user like the song, rules as below: 
       - 0.8 <= ‘play_time_percentage_of_song_length’, assign ‘play_score’ 5
       - 0.6 <= ‘play_time_percentage_of_song_length’ < 0.8, assign ‘play_score’ 4
       - 0.4 <= ‘play_time_percentage_of_song_length’ < 0.6, assign ‘play_score’ 3
       - 0.2 <= ‘play_time_percentage_of_song_length’ < 0.4, assign ‘play_score’ 2
       - 0 <= ‘play_time_percentage_of_song_length’ < 0.2, assign ‘play_score’ 1
       - **Note**: If per uid per song_id has multiple ratings, we take average.
-    - ‘download_score’ are generate by whether user has download entry in feature window: 2017-03-30 ~ 2017-04-28 with idea that if a user downloads a song, he has great probability to like the song, rules as below: 
+    - **download_score** are generate by whether user has download entry in feature window: 2017-03-30 ~ 2017-04-28 with idea that if a user downloads a song, he has great probability to like the song, rules as below: 
     - If have download entry, assign ‘download_score’ 5
     - If no download entry, assign ‘download_score’ 0
 - [**Detailed Code**](https://github.com/will-zw-wang/Music_box-Churn_Prediction_and_Recommender_System/blob/master/code/4_feature_label_generation_with_spark.ipynb)
