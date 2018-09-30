@@ -145,7 +145,7 @@ X music box is a well-known music player platform and interested in **Churn Pred
   
 - Insights and Recommendations
   - Users' recent behavior pattern is more informative, we should pay more attention to last 7 days and last 14 days related matric, especially frequency features and acceleration features, like **freq_P_last_14**, **freq_P_last_7**, **P_7d_over_30d**, **total_play_time_7d_over_30d** and **time_percentage_larger_than_80_7d_over_30d**.
-  - Once the time gap between **the last active day from feature_window_end_date** comes to 7 days, we should pay more attention to these users; once the time gap comes to 14 days, we should take some action to reactive them, like sending e-mail to recommend songs, offering free trial, discount or freemonth.
+  - Once the time gap between **the last active day** and **feature_window_end_date** comes to 7 days, we should pay more attention to these users; once the time gap comes to 14 days, we should take some action to reactive them, like sending e-mail to recommend songs, offering free trial, discount or freemonth.
   - Generate the churn probability of every user and rank to figure out the users most likely to churn, then send them e-mail to recommend songs, or offer them free trial, discount or freemonth to reactive them.
   - Figure out our target users who are most unlikely to churn with our model, try to figure out what’s common to this subsection of users, refocus on their needs, and grow from there. 
     - To be specific, develop features which target users care, allocate campaigns budget to markets where our target users in.
