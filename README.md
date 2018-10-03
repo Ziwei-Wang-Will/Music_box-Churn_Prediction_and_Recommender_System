@@ -165,31 +165,31 @@ X music box is a well-known music player platform and interested in **Churn Pred
     - We defined **popular** as songs with most played records.
     - For every new user or user played less than five songs, we build a **Popularity-based recommender** to recommend most popular songs at first. 
     - Our **Popularity-based recommender** recommended top 10 songs: 
-      - [10375, 9320, 6496, 6070, 5338, 5248, 4671, 4474, 4122, 3782].
+      - [2088, 5163, 6116, 5872, 6125, 15662, 5785, 6059, 5550, 1454].
   - **Neighborhood-based Approach Collaborative Filtering Recommender：Item-Item similarity recommender**
     - For user played more than five songs, we tried **Neighborhood-based approach** to build an **Item-Item similarity recommender** here. 
     - Given a user_id and recommend 10 songs which have the largest similarities with songs the user had played before.
     - We tried to get final recommendations for a user: user_number = 100, and our **Item-Item similarity recommender** recommended top 10 songs: 
-      - [42746, 45983, 38553, 38554, 38555, 38556, 38557, 45981, 45982, 45984]
-      - With an **average absolute error** of **0. 92**.
+      - [47185, 41924, 36516, 36517, 36518, 46249, 46248, 46247, 46246, 46245]
+      - With an **average absolute error** of **0. 9565**.
     - Then we tried to improve performance with **Matrix Factorization approach** to build recommender, because **matrix factorization models** always perform better than **neighborhood models** in **collaborative filtering**. 
       - **Reason**: 
         - The reason is when we factorize a ‘m*n’ matrix into two ‘m*k’ and ‘k*n’ matrices we are reducing our "n"items to "k"factors, which means that instead than having our 50000 songs, we now have 500 factors where each factor is a linear combination of songs. 
         - The key is that recommending based on factors is more robust than just using song similarities, maybe a user hasn’t played the song ‘stay’ but the user might have player other songs that are related to ‘stay’ via some latent factors and those can be used.
         - The factors are called latent because they are there in our data but are not really discovered until we run the reduced rank matrix factorization, then the factors emerge and hence the "latency".
   - **Matrix Factorization Approach Collaborative Filtering Recommender：NMF**
-    - The **RMSE** of **NMF** is **1.3431**, and the **average absolute error** is **0.6158**, the performance is acceptable. 
+    - The **RMSE** of **NMF** is **1.3494**, and the **average absolute error** is **0.6121**, the performance is acceptable. 
     - We tried to get final recommendations for a user: user_number = 100, and our **NMF** recommender recommended top 10 songs: 
-      - [45979, 45977, 45978, 10569, 26479, 9938, 23038, 9869, 9880, 23062]
-      - With an **average absolute error** of **0.023**.
-    - The same as what we discussed above, the **average absolute error** of **NMF** for this specific user is better than **0.92** of **Item-Item similarity recommender**.
-    - Then we tried **TruncatedSVD** to verify whether it performs better than **NMF**.
-  - **Matrix Factorization Approach Collaborative Filtering Recommender：TruncatedSVD**
-    - The **RMSE** of **TruncatedSVD** is **1.1702** and the **average absolute error** is **0.56**, which are better than scores of **NMF**(**1.3431** and **0.6158**). 
-      - **Reason**: **TruncatedSVD** performs better because it has larger degree of freedom than **NMF**, to be specific, **NMF** is a specialization of **TruncatedSVD**, all values of V, W, and H in **NMF** must be non-negative.
-    - Then we tried to get final recommendations for a user: user_number = 100, and our **TruncatedSVD recommender** recommended top 10 songs: 
-      - [258, 7341, 7512, 18055, 28364, 658, 13202, 45719, 48377, 48378]
-      - With an **average absolute error** of **0.044**, which is very close to **0.023** of **NMF**.
+      - [51347, 51348, 41708, 1170, 11460, 1666, 7873, 7144, 10250, 6837]
+      - With an **average absolute error** of **0.0137**.
+    - The same as what we discussed above, the **average absolute error** of **NMF** for this specific user is better than **0.9656** of **Item-Item similarity recommender**.
+    - Then we tried **UVD** to verify whether it performs better than **NMF**.
+  - **Matrix Factorization Approach Collaborative Filtering Recommender：UVD**
+    - The **RMSE** of **UVD** is **1.1729** and the **average absolute error** is **0.5569**, which are better than scores of **NMF**(**1.3494** and **0.6121**). 
+      - **Reason**: **UVD** performs better because it has larger degree of freedom than **NMF**, to be specific, **NMF** is a specialization of **UVD**, all values of V, W, and H in **NMF** must be non-negative.
+    - Then we tried to get final recommendations for a user: user_number = 100, and our **UVD recommender** recommended top 10 songs: 
+      - [10718, 6837, 4440, 10605, 21281, 1170, 21562, 51347, 51348, 6422]
+      - With an **average absolute error** of **0.0391**, which is very close to **0.0137** of **NMF**.
 - [**Detailed Code**](https://github.com/will-zw-wang/Music_box-Churn_Prediction_and_Recommender_System/blob/master/code/6_Recommender_Systems.ipynb) 
 
 ### 6. Recommendation Results Analysis, Insights and Next Step
@@ -198,14 +198,14 @@ X music box is a well-known music player platform and interested in **Churn Pred
     - <img src="https://github.com/will-zw-wang/Music_box-Churn_Prediction_and_Recommender_System/blob/master/images/The%20overlap%20of%20the%20top%2010%20recommendation%20generated%20by%20these%20four%20models.png">
     - <img src="https://github.com/will-zw-wang/Music_box-Churn_Prediction_and_Recommender_System/blob/master/images/The%20overlap%20of%20the%20top%20100%20recommendation%20generated%20by%20these%20four%20models.png">
   - From the overlap tables above, we notice that:
-    - The recommended songs given by **Popularity-based**, **Neighborhood-based approach** and **Matrix Factorization approach** models are very different from each other, have no overlap in top 10 even in top 100 recommended songs.
-    - While the recommended songs given by **NMF** and **TruncatedSVD** have no overlap in top 10 and 30% overlap in top 100 recommended songs.
+    - The recommended songs given by **Popularity-based**, **Neighborhood-based approach** and **Matrix Factorization approach** models are very different from each other, have no overlap in top 10 and only 3 overlaps in top 100 recommended songs.
+    - While the recommended songs given by **NMF** and **UVD** have 4 overlaps in top 10 and 66 overlaps in top 100 recommended songs.
 - Conclusion:
   - 1. For **new user or user played less than five songs**, we can recommend most popular songs at first generated by our **Popularity-based recommender**.
   - 2. For **user played more than five songs**:
-    - Given the performances of **NMF** and **TruncatedSVD** are comparable, we can have the overlap of commendation results generated by these two models as the final recommendation.
+    - Given the performances of **NMF** and **UVD** are comparable, we can have the overlap of commendation results generated by these two models as the final recommendation.
     - As the results generated by **Popularity-based**, **Neighborhood-based Approach** and **Matrix Factorization Approach** models are totally different, we can allocate different weights to these models to construct the final recommendation. 
-      - Like 0.2 for **Popularity-based**, 0.2 for **Neighborhood-based**, 0.6 for overlap of **NMF** and **TruncatedSVD**.
+      - Like 0.2 for **Popularity-based**, 0.2 for **Neighborhood-based**, 0.6 for overlap of **NMF** and **UVD**.
 - Next step
   - Besides the insights mentioned above, I think there are aspects we can further dive deep, like:
     - As we have huge amounts of users, we can try to perform clustering to all users, cluster users with high similarities into the same cluster, which allows us to perform different recommendation algorithm to different clusters, more efficient and more targeted.
