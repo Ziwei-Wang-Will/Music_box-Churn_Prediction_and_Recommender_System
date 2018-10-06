@@ -28,7 +28,7 @@ X music box is a well-known music player platform and interested in **Churn Pred
 6. Recommendation Results Analysis, Insights and Next Step
 
 
-## Analysis Details 
+## Analysis Details
 
 ### 1. Data Exploration and Down Sampling by User
 - **Get user id list and count**  
