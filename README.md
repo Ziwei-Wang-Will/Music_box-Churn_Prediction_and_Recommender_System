@@ -116,7 +116,7 @@ X music box is a well-known music player platform and interested in **Churn Pred
   - **Random Forest HyperParameter Tuning with Grid Search**
     - Model Performance
       - <img src="https://github.com/will-zw-wang/Music_box-Churn_Prediction_and_Recommender_System/blob/master/images/Model_Performance_RF_GS.png" width="360" height="360">
-    - **AUC** of test data is **0.9062** with **Random Forest HyperParameter Tuning with Grid Search**, is slightly better than that of previous **Random Forest** with **0.9061**
+    - **AUC** of test data is **0.9060** with **Random Forest HyperParameter Tuning with Grid Search**, is close to that of previous **Random Forest** with **0.9061**
     - we select this model to explore the features importance to get some insights.
 - [**Detailed Code**](https://github.com/will-zw-wang/Music_box-Churn_Prediction_and_Recommender_System/blob/master/code/5_Churn_Prediction_Models.ipynb) 
 
