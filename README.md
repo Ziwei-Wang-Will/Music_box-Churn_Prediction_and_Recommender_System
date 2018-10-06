@@ -95,19 +95,27 @@ X music box is a well-known music player platform and interested in **Churn Pred
 ### 3. Churn Prediction Model Fitting, Models Comparison and HyperParameter Tuning
 - **Models comparison and reasoning**
   - **Logistic Regression**
+    - Model Performance
+      - <img src="https://github.com/will-zw-wang/Music_box-Churn_Prediction_and_Recommender_System/blob/master/images/Model_Performance_LR.png" width="360" height="360">
     - **AUC** of test data is **0.8866** with **Logistic Regression**.
     - We tried to improve model performance with **Random Forest**.
   - **Random Forest**
+    - Model Performance
+      - <img src="https://github.com/will-zw-wang/Music_box-Churn_Prediction_and_Recommender_System/blob/master/images/Model_Performance_RF.png" width="360" height="360">
     - **AUC** of test data is **0.9061** with **Random Forest**, better than that of **Logistic Regression** with **0.8866**.
       - **Reason**: There are feature interaction and non-linearity relationship between features and target in our data set, trees algorithms can deal with these problems while logistic regression cannot.
     - We tried to further improve model performance with **Gradient Boosting Trees**.
       - **Reason**: In general, **Gradient Boosting Trees** can perform better than **Random Forest**, because it additionally tries to find optimal linear combination of trees (assume final model is the weighted sum of predictions of individual trees) in relation to given train data. This extra tuning may lead to more predictive power.
   - **Gradient Boosting Trees**
+    - Model Performance
+      - <img src="https://github.com/will-zw-wang/Music_box-Churn_Prediction_and_Recommender_System/blob/master/images/Model_Performance_GDBT.png" width="360" height="360">
     - **AUC** of test data is **0.9036** with **Gradient Boosting Trees**, is close to that of **Random Forest** with **0.9061**.
       - **Reason**: Our **Random forest** has already performed greatly in this dataset and hard for **Gradient Boosting Trees** to perform better.
     - Thus, we chose **Random Forest** as our preferred model.
     - Then we tried HyperParameter Tuning with Grid Search for Random Forest, to figure out whether we can do better.
   - **Random Forest HyperParameter Tuning with Grid Search**
+    - Model Performance
+      - <img src="https://github.com/will-zw-wang/Music_box-Churn_Prediction_and_Recommender_System/blob/master/images/Model_Performance_RF_GS.png" width="360" height="360">
     - **AUC** of test data is **0.9062** with **Random Forest HyperParameter Tuning with Grid Search**, is slightly better than that of previous **Random Forest** with **0.9061**
     - we select this model to explore the features importance to get some insights.
 - [**Detailed Code**](https://github.com/will-zw-wang/Music_box-Churn_Prediction_and_Recommender_System/blob/master/code/5_Churn_Prediction_Models.ipynb) 
