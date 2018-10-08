@@ -42,7 +42,7 @@ X music box is a well-known music player platform and interested in **Churn Pred
     - 0.8 million 'S' log records, ‘S’ for ‘search’.
     - 11.0 million 'P' log records, ‘P’ for ‘play’.
 - **Created event table for feature generation**  
-- [**Detailed Code**](https://github.com/will-zw-wang/Music_box-Churn_Prediction_and_Recommender_System/blob/master/code/3_down_sampling_by_user.ipynb)
+- [**Detailed Code and Plotting**](https://github.com/will-zw-wang/Music_box-Churn_Prediction_and_Recommender_System/blob/master/code/3_down_sampling_by_user.ipynb)
 
 ### 2. Data Processing and Feature Engineering with Spark
 - **Label definition**
@@ -90,7 +90,7 @@ X music box is a well-known music player platform and interested in **Churn Pred
     - **download_score** were generate by whether user had download entry in feature window: 2017-03-30 ~ 2017-04-28 with idea that if a user downloaded a song, he had great probability to like the song, rules as below: 
       - If had download entry, assign ‘download_score’ 5
       - If no download entry, assign ‘download_score’ 0
-- [**Detailed Code**](https://github.com/will-zw-wang/Music_box-Churn_Prediction_and_Recommender_System/blob/master/code/4_feature_label_generation_with_spark.ipynb)
+- [**Detailed Code and Plotting**](https://github.com/will-zw-wang/Music_box-Churn_Prediction_and_Recommender_System/blob/master/code/4_feature_label_generation_with_spark.ipynb)
 
 ### 3. Churn Prediction Model Fitting, Models Comparison and HyperParameter Tuning
 - **Models comparison and reasoning**
@@ -118,7 +118,7 @@ X music box is a well-known music player platform and interested in **Churn Pred
       - <img src="https://github.com/will-zw-wang/Music_box-Churn_Prediction_and_Recommender_System/blob/master/images/Model_Performance_RF_GS.png" width="360" height="360">
     - **AUC** of test data was **0.9060** with **Random Forest HyperParameter Tuning with Grid Search**, was close to that of previous **Random Forest** with **0.9061**
     - We selected this model to explore the features importance to get some insights.
-- [**Detailed Code**](https://github.com/will-zw-wang/Music_box-Churn_Prediction_and_Recommender_System/blob/master/code/5_Churn_Prediction_Models.ipynb) 
+- [**Detailed Code and Plotting**](https://github.com/will-zw-wang/Music_box-Churn_Prediction_and_Recommender_System/blob/master/code/5_Churn_Prediction_Models.ipynb) 
 
 ### 4. Churn Prediction Analysis, Insights and Next Step
 
@@ -198,7 +198,7 @@ X music box is a well-known music player platform and interested in **Churn Pred
     - Then we tried to get final recommendations for a user: user_number = 100, and our **UVD recommender** recommended top 10 songs: 
       - [10718, 6837, 4440, 10605, 21281, 1170, 21562, 51347, 51348, 6422]
       - With an **average absolute error** of **0.0391**, which was very close to **0.0137** of **NMF**.
-- [**Detailed Code**](https://github.com/will-zw-wang/Music_box-Churn_Prediction_and_Recommender_System/blob/master/code/6_Recommender_Systems.ipynb) 
+- [**Detailed Code and Plotting**](https://github.com/will-zw-wang/Music_box-Churn_Prediction_and_Recommender_System/blob/master/code/6_Recommender_Systems.ipynb) 
 
 ### 6. Recommendation Results Analysis, Insights and Next Step
 - **Recommendation results Analysis between different recommendation systems**
