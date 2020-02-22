@@ -222,9 +222,5 @@ X music box is a well-known music streaming service and interested in **Churn Pr
     - As we have huge amounts of users, we can try to perform clustering to all users, cluster users with high similarities into the same cluster, which allows us to perform different recommendation algorithm to different clusters, more efficient and more targeted.
     - Develop 'dislike' feature which allow users to flag songs they don't like, so that our recommender will not recommend the disliked songs again, on the other hand, our recommender can avoid recommending songs with high similarities with disliked songs.
     - Our recommendation system should also consider the style of the song, such as recommending rock or pop music in working hours, recommending light music or antiques in evening time, etc.
-
-
-
-
   
 
